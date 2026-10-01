@@ -1,22 +1,38 @@
 [project]
 name = "job-webscrapper"
 version = "0.1.0"
-description = "Add your description here"
+description = "Scrape job roles from careers pages with a headless browser + AI extraction into polars"
 readme = "README.md"
 authors = [
     { name = "Jesus Tuesta", email = "anderson.tuestas@gmail.com" }
 ]
 requires-python = ">=3.11"
 dependencies = [
+    "dotenv>=0.9.9",
+    "fastexcel>=0.21.0",
     "matplotlib>=3.11.2",
+    "openai>=3.22.1",
     "pandas>=3.0.6",
+    "playwright>=1.63.0",
     "polars>=1.44.2",
+    "requests>=2.34.2",
     "seaborn>=0.13.2",
 ]
 
 [project.scripts]
-job-webscrapper = "job_webscrapper:main"
+job-webscrapper = "main:main"
 
 [build-system]
 requires = ["uv_build>=0.12.21,<0.13.0"]
 build-backend = "uv_build"
+
+[dependency-groups]
+dev = [
+    "pytest>=9.1.1",
+    "xlsxwriter>=3.2.9",
+]
+
+[tool.pytest.ini_options]
+markers = [
+    "network: hits live sites or the opencode API (deselect with -m 'not network')",
+]
